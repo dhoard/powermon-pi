@@ -5,7 +5,6 @@ import datetime
 import RPi.GPIO as GPIO
 
 # Constants
-
 POWER_UP = "POWER UP"
 POWER_FAILURE = "POWER FAILURE"
 

@@ -1,0 +1,11 @@
+[Unit]
+Description=Powermon Pi
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/powermon-pi
+ExecStart=/opt/powermon-pi/powermon-pi.sh
+
+[Install]
+WantedBy=network-online.target

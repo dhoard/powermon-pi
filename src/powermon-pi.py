@@ -4,6 +4,11 @@ import time
 import datetime
 import RPi.GPIO as GPIO
 
+# Constants
+
+POWER_UP = "POWER UP"
+POWER_FAILURE = "POWER FAILURE"
+
 # Debug
 def debug(message):
 	
@@ -21,13 +26,6 @@ def write(filename, message):
 	f.write(message)
 	f.close()
 
-GPIO.setmode(GPIO.BOARD)
-INPUT_PIN = 12 
-GPIO.setup(INPUT_PIN, GPIO.IN)
-
-POWER_UP = "POWER UP"
-POWER_FAILURE = "POWER FAILURE"
-
 def main(checkIntervalMs, statusFilename):
 
 	log("starting...")
@@ -35,6 +33,10 @@ def main(checkIntervalMs, statusFilename):
 	log("  statusFilename = [" + statusFilename + "]")
 	
 	previousStatus = ""
+
+	GPIO.setmode(GPIO.BOARD)
+	INPUT_PIN = 12
+	GPIO.setup(INPUT_PIN, GPIO.IN)
 
 	while True:
 

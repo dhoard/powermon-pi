@@ -19,9 +19,9 @@ def log(message):
 
 	print(str(datetime.datetime.fromtimestamp(time.time())) + " " + message, flush = True)
 
-def write(filename, message):
+def write(filename, message, mode):
 
-	f = open(filename, "w")
+	f = open(filename, mode)
 	f.write(message)
 	f.close()
 
@@ -52,11 +52,12 @@ def main(checkIntervalMs, statusFilename):
 			currentStatus = POWER_FAILURE
 
 		debug("status = [" + currentStatus + "]")
+		write("/var/log/powermon-pi.status", str(datetime.datetime.fromtimestamp(time.time())) + " status = [" + currentStatus + "]", "w")  
 
 		if currentStatus != previousStatus:
 	
 			log("status = [" + currentStatus + "]")
-			write(statusFilename, currentStatus)
+			write(statusFilename, currentStatus, "w")
 
 		previousStatus = currentStatus
 		time.sleep(checkIntervalMs / 1000)
